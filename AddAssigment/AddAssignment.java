@@ -14,7 +14,7 @@ import org.xml.sax.helpers.AttributesImpl;
  * @author Gustavo German Soria
  * 
  * File: AddAssignments.php 
- * Variables: ‘selectclass’
+ * Variable: ‘selectclass’
  * Vulnerability: the variable is passed within a hidden field, but the value can be modified closing  
  * the tag and refining the attack.
  */
