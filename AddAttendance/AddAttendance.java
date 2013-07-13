@@ -13,10 +13,10 @@ import org.xml.sax.helpers.AttributesImpl;
 /**
  * @author Gustavo German Soria
  * 
- * File: AddAssignments.php 
- * Variable: ‘selectclass’
- * Vulnerability: the variable is passed within a hidden field, but the value can be modified closing  
- * the tag and refining the attack.
+ * File: AddAttendance.php 
+ * Variables: ‘semester’, ‘student’.
+ * Vulnerability: the variables are passed within a hidden field, but the value 
+ * can be modified closing  the tag and refining the attack.
  */
 public class AddAttendance {
     
@@ -32,29 +32,50 @@ public class AddAttendance {
     }
 
     @Test
-    public void testVulnerability11() {
+    //variable semester
+    public void testVulnerability13a() {
         tester.beginAt("index.php");
         tester.assertMatch("Today's Message");
 
-        tester.setTextField("username", "teacher1");
-        tester.setTextField("password", "nonlaso");
+        tester.setTextField("username", "test");
+        tester.setTextField("password", "test");
         tester.submit();
+        tester.assertMatch("Manage Classes");
 
-        tester.assertMatch("topolino topolino's Classes");
-        tester.setWorkingForm("teacher");
-        tester.clickLinkWithText("class1");
-
-
-        tester.assertMatch("Class Settings");
-        tester.clickLinkWithText("Assignments");
-        tester.assertMatch("Manage Assignments");
+        tester.clickLinkWithText("Attendance");
+        tester.assertMatch("Attendance");
         tester.clickButtonWithText("Add");
+        tester.assertTextPresent("Add New Attendance Record");
 
-        tester.setWorkingForm("addassignment");
-        tester.setTextField("selectclass", "4 '> <a href=www.ibm.com>malicious link</a> <br / '");
-        addSubmitButton("//form[@name='addassignment']");
+        tester.setWorkingForm("addattendance");
+        tester.setTextField("semester", "4 '> <a href=www.ibm.com>malicious link</a> <br / '");
+        addSubmitButton("//form[@name='addattendance']");
         tester.submit();
 
+        tester.assertLinkNotPresentWithText("malicious link");
+    }
+
+    @Test
+    //variable student
+    public void testVulnerability13b() {
+        tester.beginAt("index.php");
+        tester.assertMatch("Today's Message");
+
+        tester.setTextField("username", "test");
+        tester.setTextField("password", "test");
+        tester.submit();
+        tester.assertMatch("Manage Classes");
+
+        tester.clickLinkWithText("Attendance");
+        tester.assertMatch("Attendance");
+        tester.clickButtonWithText("Add");
+        tester.assertTextPresent("Add New Attendance Record");
+
+        tester.setWorkingForm("addattendance");
+        tester.setTextField("student", "4 '> <a href=www.ibm.com>malicious link</a> <br / '");
+        addSubmitButton("//form[@name='addattendance']");
+        tester.submit();
+        
         tester.assertLinkNotPresentWithText("malicious link");
     }
     
