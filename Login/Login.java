@@ -1,6 +1,7 @@
 package test;
 
 import net.sourceforge.jwebunit.junit.WebTester;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +20,7 @@ import org.junit.Test;
 public class Login {
 
     private WebTester tester;
+    private String previousValue54 = " ";
 
     public Login() {
     }
@@ -26,7 +28,7 @@ public class Login {
     @Before
     public void setUp() {
         tester = new WebTester();
-        tester.setBaseUrl("http://localhost:8888/schoolmate2/");
+        tester.setBaseUrl("http://localhost:8888/schoolmate/");
     }
 
     @Test
@@ -40,9 +42,25 @@ public class Login {
         tester.assertMatch("Manage Classes");
         tester.clickLinkWithText("School");
         tester.assertMatch("Manage School Information");
+        previousValue54 = tester.getElementByXPath("html//textarea[@name='sitetext']").getTextContent();
         tester.setTextField("sitetext", "<a href=http://www.ibm.com>Malicious link Text</a>");
         tester.clickButtonWithText(" Update ");
         tester.clickLinkWithText("Log Out");
         tester.assertLinkNotPresentWithText("Malicious link Text");
+    }
+    
+    @After
+    public void tearDown54() {
+        tester.beginAt("index.php");
+        tester.assertMatch("Today's Message");
+
+        tester.setTextField("username", "test");
+        tester.setTextField("password", "test");
+        tester.submit();
+        tester.assertMatch("Manage Classes");
+        tester.clickLinkWithText("School");
+        tester.assertMatch("Manage School Information");
+        tester.setTextField("sitetext", this.previousValue54);
+        tester.clickButtonWithText(" Update ");
     }
 }
