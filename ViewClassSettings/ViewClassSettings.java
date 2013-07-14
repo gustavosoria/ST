@@ -11,10 +11,12 @@ import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- * @author Gustavo German Soria ID: 163076
+ * @author Gustavo German Soria 
+ * ID: 163076
  *
- * File: EditSemester.php Variable: ‘delete’ Vulnerability: variable is passed
- * within a hidden field.
+ * File: ViewClassSettings.php 
+ * Variable: ‘selectclass’ 
+ * Vulnerability: variable is passed within a hidden field.
  */
 public class ViewClassSettings {
 
