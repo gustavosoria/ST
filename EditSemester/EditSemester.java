@@ -37,7 +37,7 @@ public class EditSemester {
         tester.clickLinkWithText("Semesters");
         tester.setWorkingForm("semesters");
         tester.checkCheckbox("delete[]", "2");
-        tester.setTextField("delete[]","<a href=http://www.google.com>Malicious link</a><br />");
+        tester.setTextField("delete[]","<a href=http://www.ibm.com>Malicious link</a><br />");
 
         tester.clickButtonWithText("Edit");
         tester.assertLinkNotPresentWithText("Malicious link");
