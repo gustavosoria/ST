@@ -12,7 +12,8 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * @author Gustavo German Soria
- * 
+ * ID: 163076
+ *
  * File: AddAttendance.php 
  * Variables: ‘semester’, ‘student’.
  * Vulnerability: the variables are passed within a hidden field, but the value 

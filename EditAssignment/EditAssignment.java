@@ -28,7 +28,7 @@ public class EditAssignment {
     @Before
     public void setUp() {
         tester = new WebTester();
-        tester.setBaseUrl("http://localhost:8888/schoolmate2/");
+        tester.setBaseUrl("http://localhost:8888/schoolmate/");
     }
 
     @Test
